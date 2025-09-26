@@ -165,13 +165,13 @@ section.band:after {
 .team-inline-content {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 @media (min-width: 768px) {
   .team-inline-content {
     grid-template-columns: 1fr 200px;
-    align-items: start;
+    align-items: center;
   }
 }
 
@@ -182,6 +182,25 @@ section.band:after {
   object-fit: cover;
   border-radius: 0.5rem;
   border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.team-inline-image-svg {
+  width: 100%;
+  max-width: 200px;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.team-inline-image-clean {
+  width: 100%;
+  max-width: 200px;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.75rem;
 }
 
 .team-inline-description {
