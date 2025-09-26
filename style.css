@@ -203,3 +203,128 @@ section.band:after {
   text-indent: 1rem;
   line-height: 1.7;
 }
+
+/* Estilos para tabelas militares */
+.table-mil {
+  background: rgba(2, 6, 23, 0.4);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.table-mil thead {
+  background: rgba(59, 130, 246, 0.15);
+  border-bottom: 2px solid rgba(59, 130, 246, 0.4);
+}
+
+.table-mil th {
+  color: var(--ol);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.875rem;
+  border-right: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.table-mil th:last-child {
+  border-right: none;
+}
+
+.table-mil tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.table-mil tbody tr:hover {
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.table-mil tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table-mil td {
+  color: rgba(229, 231, 235, 0.9);
+  font-weight: 500;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.table-mil td:last-child {
+  border-right: none;
+}
+
+/* Cards militares para regras */
+.card-mil {
+  background: rgba(2, 6, 23, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.card-mil:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(59, 130, 246, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Link para regras base */
+.rules-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ol);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 0.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.rules-link:hover {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateX(4px);
+}
+
+/* Subseções das regras */
+.rule-subsection {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1.5rem 0;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.rule-subsection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ol), rgba(59, 130, 246, 0.3));
+  border-radius: 0;
+}
+
+.rule-subsection h3 {
+  position: relative;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.rule-subsection h3::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--ol);
+  font-weight: bold;
+}
+
+.rule-subsection-content {
+  margin-left: 1rem;
+  padding-left: 0;
+  border-left: none;
+}
