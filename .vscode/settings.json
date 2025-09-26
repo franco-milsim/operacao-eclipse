@@ -1,0 +1,59 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.language": "pt-BR",
+  "cSpell.enabled": true,
+  "cSpell.enabledFileTypes": {
+    "html": true,
+    "css": true,
+    "javascript": true,
+    "typescript": true,
+    "json": true,
+    "markdown": true
+  },
+  "cSpell.dictionaries": ["portuguese", "portuguese-brazilian"],
+  "cSpell.words": [
+    "Milsim",
+    "Franco",
+    "Operação",
+    "Eclipse",
+    "Espectros",
+    "Águias",
+    "Negras",
+    "Falcão",
+    "Oliveira",
+    "Santos",
+    "airsoft",
+    "IFAK",
+    "IFAKs",
+    "briefing",
+    "SAW",
+    "DMR",
+    "sniper",
+    "spring",
+    "elétrica",
+    "BBs",
+    "ricochetes",
+    "WhatsApp",
+    "PIX",
+    "stencil",
+    "camo",
+    "tailwindcss",
+    "viewport",
+    "antialiased",
+    "inset",
+    "rgba"
+  ]
+}
