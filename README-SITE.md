@@ -1,13 +1,16 @@
 # Operação Eclipse - Milsim do Franco
 
 ## 🌐 Site Oficial
+
 Este site está hospedado no GitHub Pages e pode ser acessado em:
 **https://franco-milsim.github.io/operacao-eclipse/**
 
 ## 📋 Sobre o Projeto
+
 Site oficial da Operação Eclipse - um evento de Milsim (Military Simulation) organizado pelo Franco.
 
 ### 🎯 Características:
+
 - História imersiva com narrativa militar
 - Eventos preparatórios durante a semana
 - Grande operação no domingo
@@ -15,6 +18,7 @@ Site oficial da Operação Eclipse - um evento de Milsim (Military Simulation) o
 - Interface responsiva e temática militar
 
 ### 🛠️ Tecnologias Utilizadas:
+
 - HTML5 semântico
 - CSS3 com variáveis customizadas
 - Tailwind CSS via CDN
@@ -23,9 +27,11 @@ Site oficial da Operação Eclipse - um evento de Milsim (Military Simulation) o
 - Verificação ortográfica PT-BR
 
 ## 🚀 Deploy
+
 O site é automaticamente implantado via GitHub Pages sempre que há push para o branch `main`.
 
 ## 📝 Estrutura do Projeto:
+
 ```
 ├── index.html          # Página principal
 ├── style.css           # Estilos customizados

@@ -43,8 +43,8 @@ body {
 .stamp {
   display: inline-block;
   border: 2px dashed var(--tn);
-  padding: 0.25rem 0.6rem 0.25rem 0;
-  transform: rotate(-2deg) scale(0.8);
+  padding: 0.25rem 0.6rem;
+  transform: rotate(-2deg);
   margin-left: -0.6rem;
 }
 section.band {
