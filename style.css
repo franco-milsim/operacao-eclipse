@@ -347,3 +347,228 @@ section.band:after {
   padding-left: 0;
   border-left: none;
 }
+
+/* Avisos de prazo - Deadline Notices */
+.deadline-notice {
+  background: linear-gradient(
+    135deg,
+    rgba(220, 38, 38, 0.15),
+    rgba(249, 115, 22, 0.15)
+  );
+  border: 2px solid rgba(220, 38, 38, 0.4);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.deadline-notice::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(220, 38, 38, 0.1),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.deadline-title {
+  color: #fecaca;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.deadline-date {
+  color: #fca5a5;
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.deadline-date .highlight {
+  color: #ef4444;
+  font-weight: 900;
+}
+
+.deadline-warning {
+  color: rgba(254, 202, 202, 0.9);
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+}
+
+.deadline-subtitle {
+  color: rgba(254, 202, 202, 0.8);
+  font-size: 0.75rem;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* Aviso de encerramento */
+.closed-notice {
+  background: linear-gradient(
+    135deg,
+    rgba(75, 85, 99, 0.8),
+    rgba(107, 114, 128, 0.6)
+  );
+  border: 2px solid rgba(156, 163, 175, 0.8);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  color: #f9fafb;
+}
+
+.closed-title {
+  color: #f3f4f6;
+  font-size: 1.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.closed-subtitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #e5e7eb;
+}
+
+.closed-subtitle .highlight {
+  color: #3b82f6;
+  font-weight: 700;
+}
+
+.closed-date {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #d1d5db;
+}
+
+.closed-date .highlight {
+  font-weight: 600;
+  color: #f3f4f6;
+}
+
+.closed-contact {
+  background: rgba(75, 85, 99, 0.5);
+  border: 1px solid rgba(107, 114, 128, 0.7);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #e5e7eb;
+}
+
+.closed-footer {
+  color: #9ca3af;
+  font-size: 0.75rem;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* Contador regressivo para o jogo */
+.game-countdown {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.countdown-title {
+  color: #d1d5db;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-timer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.countdown-item {
+  background: rgba(75, 85, 99, 0.2);
+  border: 1px solid rgba(107, 114, 128, 0.4);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.25rem;
+  backdrop-filter: blur(5px);
+}
+
+.countdown-number {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f3f4f6;
+  margin-bottom: 0.125rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.countdown-label {
+  display: block;
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.countdown-date {
+  color: #d1d5db;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .countdown-timer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    max-width: 200px;
+  }
+
+  .countdown-item {
+    padding: 0.5rem 0.25rem;
+  }
+
+  .countdown-number {
+    font-size: 1.125rem;
+  }
+
+  .countdown-title {
+    font-size: 0.875rem;
+  }
+
+  .countdown-date {
+    font-size: 0.625rem;
+  }
+}
