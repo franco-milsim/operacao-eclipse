@@ -766,20 +766,16 @@
                 </div>
               </div>
 
-              <div class="grid grid-cols-2 gap-4 mb-6" id="team1-prices">
+              <div class="mb-6" id="team1-prices">
                 <div
-                  class="rounded-lg bg-gray-600/20 border border-gray-500/30 p-4"
+                  class="rounded-lg bg-gray-600/20 border border-gray-500/30 p-6 text-center"
                 >
-                  <div class="text-gray-300 font-semibold">
-                    Com semestral AMA
+                  <div class="text-gray-300 font-semibold mb-2">
+                    Valor da Inscrição
                   </div>
-                  <div class="text-2xl font-bold mt-1">R$ 15,00</div>
-                </div>
-                <div
-                  class="rounded-lg bg-gray-600/20 border border-gray-500/30 p-4"
-                >
-                  <div class="text-gray-300 font-semibold">Sem semestral</div>
-                  <div class="text-2xl font-bold mt-1">R$ 20,00</div>
+                  <div class="text-3xl font-bold text-[--ol]" id="team1-price">
+                    R$ 20,00
+                  </div>
                 </div>
               </div>
 
@@ -859,20 +855,16 @@
                 </div>
               </div>
 
-              <div class="grid grid-cols-2 gap-4 mb-6" id="team2-prices">
+              <div class="mb-6" id="team2-prices">
                 <div
-                  class="rounded-lg bg-gray-600/20 border border-gray-500/30 p-4"
+                  class="rounded-lg bg-gray-600/20 border border-gray-500/30 p-6 text-center"
                 >
-                  <div class="text-gray-300 font-semibold">
-                    Com semestral AMA
+                  <div class="text-gray-300 font-semibold mb-2">
+                    Valor da Inscrição
                   </div>
-                  <div class="text-2xl font-bold mt-1">R$ 15,00</div>
-                </div>
-                <div
-                  class="rounded-lg bg-gray-600/20 border border-gray-500/30 p-4"
-                >
-                  <div class="text-gray-300 font-semibold">Sem semestral</div>
-                  <div class="text-2xl font-bold mt-1">R$ 20,00</div>
+                  <div class="text-3xl font-bold text-[--kh]" id="team2-price">
+                    R$ 20,00
+                  </div>
                 </div>
               </div>
 
@@ -1011,9 +1003,12 @@
     </footer>
 
     <script>
+      // Configurações
+      const REGISTRATION_PRICE = 15;
+
       // Datas fixas
       const REGISTRATION_OPEN = new Date("2025-10-01T00:00:00");
-      const GAME_DATE = new Date("2025-11-16T06:00:00");
+      const GAME_DATE = new Date("2025-11-23T06:00:00");
 
       // Calcular REGISTRATION_CLOSE: 20 dias antes de GAME_DATE às 00:00
       const REGISTRATION_CLOSE = new Date(
@@ -1147,9 +1142,22 @@
         if (team2Buttons)
           team2Buttons.style.display = shouldShow ? "block" : "none";
         if (team1Prices)
-          team1Prices.style.display = shouldShow ? "grid" : "none";
+          team1Prices.style.display = shouldShow ? "block" : "none";
         if (team2Prices)
-          team2Prices.style.display = shouldShow ? "grid" : "none";
+          team2Prices.style.display = shouldShow ? "block" : "none";
+
+        // Atualizar preços dinamicamente
+        if (shouldShow) {
+          const team1Price = document.getElementById("team1-price");
+          const team2Price = document.getElementById("team2-price");
+          const priceText = `R$ ${REGISTRATION_PRICE.toFixed(2).replace(
+            ".",
+            ","
+          )}`;
+
+          if (team1Price) team1Price.textContent = priceText;
+          if (team2Price) team2Price.textContent = priceText;
+        }
       }
 
       // Executar ao carregar a página
