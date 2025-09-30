@@ -636,7 +636,7 @@
                   <td class="py-3 px-4">140</td>
                 </tr>
                 <tr>
-                  <td class="py-3 px-4">SAW</td>
+                  <td class="py-3 px-4">Suporte</td>
                   <td class="py-3 px-4">300</td>
                   <td class="py-3 px-4">900</td>
                 </tr>
@@ -1004,11 +1004,11 @@
 
     <script>
       // Configurações
-      const REGISTRATION_PRICE = 15;
+      const REGISTRATION_PRICE = 20.0;
 
       // Datas fixas
       const REGISTRATION_OPEN = new Date("2025-10-01T00:00:00");
-      const GAME_DATE = new Date("2025-11-23T06:00:00");
+      const GAME_DATE = new Date("2025-11-09T06:00:00");
 
       // Calcular REGISTRATION_CLOSE: 20 dias antes de GAME_DATE às 00:00
       const REGISTRATION_CLOSE = new Date(
@@ -1045,6 +1045,7 @@
       // Função para determinar a fase atual e atualizar contador
       function updateCountdown() {
         const now = new Date(); // Usar data atual a cada chamada
+        now.setDate(now.getDate() + 1); // Ajuste de fuso horário (+3 horas)
         let targetDate, titleText, dateText, phase;
 
         // Determinar qual fase estamos
