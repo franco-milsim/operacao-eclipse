@@ -209,6 +209,13 @@
           class="mx-auto mt-32 md:h-64 opacity-95"
         />
 
+        <!-- Data do Jogo -->
+        <div class="text-center mb-4">
+          <div class="text-lg md:text-xl text-gray-300/90 font-semibold">
+            09 de Novembro de 2025
+          </div>
+        </div>
+
         <!-- Contador Regressivo Dinâmico -->
         <div class="game-countdown mt-8" id="universal-countdown">
           <div class="countdown-title" id="countdown-title-text">
@@ -1045,7 +1052,6 @@
       // Função para determinar a fase atual e atualizar contador
       function updateCountdown() {
         const now = new Date(); // Usar data atual a cada chamada
-        // now.setDate(now.getDate() + 1); // Ajuste de fuso horário (+3 horas)
         let targetDate, titleText, dateText, phase;
 
         // Determinar qual fase estamos
@@ -1161,12 +1167,22 @@
         }
       }
 
+      // Função para atualizar a data do jogo exibida
+      function updateGameDateDisplay() {
+        const gameDateElement = document.getElementById("game-date-display");
+        if (gameDateElement) {
+          gameDateElement.textContent = formatDateToPT(GAME_DATE);
+        }
+      }
+
       // Executar ao carregar a página
       document.addEventListener("DOMContentLoaded", function () {
+        updateGameDateDisplay();
         updateCountdown();
       });
 
       // Executar imediatamente também
+      updateGameDateDisplay();
       updateCountdown();
 
       // Atualizar a cada segundo
