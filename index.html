@@ -211,7 +211,10 @@
 
         <!-- Data do Jogo -->
         <div class="text-center mb-4">
-          <div class="text-lg md:text-xl text-gray-300/90 font-semibold">
+          <div
+            class="text-lg md:text-xl text-gray-300/90 font-semibold"
+            id="game-date-only"
+          >
             09 de Novembro de 2025
           </div>
         </div>
@@ -986,7 +989,8 @@
         >
           <p class="text-yellow-200">
             <strong>Patch adicional:</strong> Quer o patch do outro time também?
-            <br />Custo adicional de <strong>R$ 15,00</strong>
+            <br />Custo adicional de
+            <strong id="patch-additional-price">R$ 20,00</strong>
           </p>
         </div>
       </div>
@@ -1023,8 +1027,8 @@
       );
       REGISTRATION_CLOSE.setHours(0, 0, 0, 0); // Definir para 00:00:00
 
-      // Função para formatar data em português
-      function formatDateToPT(date) {
+      // Função para formatar apenas a data (sem horário)
+      function formatDateOnlyToPT(date) {
         const months = [
           "Janeiro",
           "Fevereiro",
@@ -1043,10 +1047,16 @@
         const day = date.getDate().toString().padStart(2, "0");
         const month = months[date.getMonth()];
         const year = date.getFullYear();
+
+        return `${day} de ${month} de ${year}`;
+      }
+
+      // Função para formatar data em português
+      function formatDateToPT(date) {
         const hours = date.getHours().toString().padStart(2, "0");
         const minutes = date.getMinutes().toString().padStart(2, "0");
 
-        return `${day} de ${month} de ${year} às ${hours}:${minutes}h`;
+        return `${formatDateOnlyToPT(date)} às ${hours}:${minutes}h`;
       }
 
       // Função para determinar a fase atual e atualizar contador
@@ -1175,14 +1185,40 @@
         }
       }
 
+      // Função para atualizar o preço do patch adicional
+      function updateAdditionalPatchPrice() {
+        const patchPriceElement = document.getElementById(
+          "patch-additional-price"
+        );
+        if (patchPriceElement) {
+          const priceText = `R$ ${REGISTRATION_PRICE.toFixed(2).replace(
+            ".",
+            ","
+          )}`;
+          patchPriceElement.textContent = priceText;
+        }
+      }
+
+      // Função para atualizar a data do jogo simples (sem horário)
+      function updateGameDateOnly() {
+        const gameDateOnlyElement = document.getElementById("game-date-only");
+        if (gameDateOnlyElement) {
+          gameDateOnlyElement.textContent = formatDateOnlyToPT(GAME_DATE);
+        }
+      }
+
       // Executar ao carregar a página
       document.addEventListener("DOMContentLoaded", function () {
         updateGameDateDisplay();
+        updateGameDateOnly();
+        updateAdditionalPatchPrice();
         updateCountdown();
       });
 
       // Executar imediatamente também
       updateGameDateDisplay();
+      updateGameDateOnly();
+      updateAdditionalPatchPrice();
       updateCountdown();
 
       // Atualizar a cada segundo
