@@ -741,6 +741,50 @@
         </div>
       </div>
 
+      <!-- Aviso sobre prioridade por ordem de pagamento -->
+      <div
+        class="bg-gradient-to-r from-amber-500/15 to-orange-500/15 border border-amber-400/40 rounded-xl p-5 backdrop-blur-sm mt-4"
+        id="priority-notice"
+      >
+        <div class="flex items-start gap-3 text-left">
+          <div class="flex-shrink-0">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-amber-400"
+            >
+              <path
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+              />
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h4
+              class="text-amber-300 font-bold text-sm mb-2 uppercase tracking-wide"
+            >
+              Escolha de times
+            </h4>
+            <p class="text-gray-200 leading-relaxed">
+              A
+              <span class="text-amber-300 font-semibold">preferência</span>
+              será definida pela
+              <span class="px-1 py-0.5 rounded text-amber-200 font-bold"
+                >data e horário do comprovante de pagamento</span
+              >
+            </p>
+            <p class="text-gray-300 text-sm mt-2 italic">
+              → Quem pagar primeiro tem prioridade de escolha
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div class="space-y-8 mt-8">
         <!-- Força Tática -->
         <div class="rounded-2xl card-mil p-6">
@@ -754,9 +798,23 @@
             </div>
 
             <div class="text-center md:text-left">
-              <h3 class="text-xl stencil-tight text-[--ol] mb-4">
+              <h3 class="text-xl stencil-tight text-[--ol] mb-2">
                 Força Tática "Águias Brancas"
               </h3>
+
+              <!-- Contador de Vagas -->
+              <div class="mb-4">
+                <div
+                  class="bg-[--ol]/10 border border-[--ol]/20 rounded-lg p-2 text-center"
+                >
+                  <p
+                    class="text-[--ol] font-semibold text-sm"
+                    id="tickets-forca-tatica"
+                  >
+                    10/10 vagas disponíveis
+                  </p>
+                </div>
+              </div>
 
               <div class="space-y-2 mb-6">
                 <p class="text-gray-200/90">✓ Direito de participar do jogo</p>
@@ -791,6 +849,7 @@
 
               <div class="space-y-3" id="team1-buttons">
                 <button
+                  id="btn-pix-forca-tatica"
                   onclick="copyPixKey()"
                   class="btn-tac w-full justify-center hover:scale-105 transition-transform registration-button"
                 >
@@ -807,6 +866,7 @@
                   </svg>
                 </button>
                 <a
+                  id="btn-group-forca-tatica"
                   href="https://chat.whatsapp.com/DhPBnH3Sqim2P5BX4Wk4fb"
                   target="_blank"
                   class="btn-tac w-full justify-center transition-colors registration-button"
@@ -847,9 +907,23 @@
             </div>
 
             <div class="text-center md:text-left">
-              <h3 class="text-xl stencil-tight text-[--kh] mb-4">
+              <h3 class="text-xl stencil-tight text-[--kh] mb-2">
                 Célula Espectros "Sombras do Passado"
               </h3>
+
+              <!-- Contador de Vagas -->
+              <div class="mb-4">
+                <div
+                  class="bg-[--kh]/10 border border-[--kh]/20 rounded-lg p-2 text-center"
+                >
+                  <p
+                    class="text-[--kh] font-semibold text-sm"
+                    id="tickets-espectros"
+                  >
+                    10/10 vagas disponíveis
+                  </p>
+                </div>
+              </div>
 
               <div class="space-y-2 mb-6">
                 <p class="text-gray-200/90">✓ Direito de participar do jogo</p>
@@ -860,8 +934,13 @@
                   <p class="text-[--kh] font-semibold text-sm">
                     Vestes Obrigatória:
                   </p>
-                  <p class="text-gray-200/90 text-sm mt-2">Camisa preta</p>
-                  <p class="text-gray-200/90 text-sm">Calça Jeans</p>
+                  <p class="text-gray-200/90 text-sm mt-2">
+                    P.M.C. (calça e camisa)
+                  </p>
+                  <p class="text-gray-200/90 text-sm">
+                    Camuflagem será permitida apenas em acessórios (colete,
+                    cinto)
+                  </p>
                 </div>
               </div>
 
@@ -880,6 +959,7 @@
 
               <div class="space-y-3" id="team2-buttons">
                 <button
+                  id="btn-pix-espectros"
                   onclick="copyPixKey()"
                   class="btn-tac w-full justify-center hover:scale-105 transition-transform registration-button"
                   style="
@@ -900,6 +980,7 @@
                   </svg>
                 </button>
                 <a
+                  id="btn-group-espectros"
                   href="https://chat.whatsapp.com/HyQDsi4PxGS9Ddc7JS6Ke9"
                   target="_blank"
                   class="btn-tac w-full justify-center transition-colors registration-button"
@@ -1016,6 +1097,9 @@
     <script>
       // Configurações
       const REGISTRATION_PRICE = 20.0;
+      const TOTAL_TICKETS = 20;
+      const TICKETS_SOLD_FORCA_TATICA = 2;
+      const TICKETS_SOLD_ESPECTROS = 0;
 
       // Datas fixas
       const REGISTRATION_OPEN = new Date("2025-10-01T00:00:00");
@@ -1142,6 +1226,7 @@
       function updateRegistrationStatus(phase) {
         const paymentInfo = document.getElementById("payment-info");
         const whatsappNotice = document.getElementById("whatsapp-notice");
+        const priorityNotice = document.getElementById("priority-notice");
         const team1Buttons = document.getElementById("team1-buttons");
         const team2Buttons = document.getElementById("team2-buttons");
         const team1Prices = document.getElementById("team1-prices");
@@ -1154,6 +1239,8 @@
           paymentInfo.style.display = shouldShow ? "block" : "none";
         if (whatsappNotice)
           whatsappNotice.style.display = shouldShow ? "block" : "none";
+        if (priorityNotice)
+          priorityNotice.style.display = shouldShow ? "block" : "none";
         if (team1Buttons)
           team1Buttons.style.display = shouldShow ? "block" : "none";
         if (team2Buttons)
@@ -1207,11 +1294,110 @@
         }
       }
 
+      // Função para calcular ingressos restantes por time
+      function calculateRemainingTickets() {
+        const ticketsPerTeam = Math.floor(TOTAL_TICKETS / 2);
+        return {
+          forcaTatica: ticketsPerTeam - TICKETS_SOLD_FORCA_TATICA,
+          espectros: ticketsPerTeam - TICKETS_SOLD_ESPECTROS,
+          totalPerTeam: ticketsPerTeam,
+        };
+      }
+
+      // Função para atualizar a exibição dos ingressos restantes
+      function updateTicketCounts() {
+        const remaining = calculateRemainingTickets();
+
+        const forcaTaticaElement = document.getElementById(
+          "tickets-forca-tatica"
+        );
+        const espectrosElement = document.getElementById("tickets-espectros");
+
+        // Atualizar contador e botões da Força Tática
+        if (forcaTaticaElement) {
+          if (remaining.forcaTatica <= 0) {
+            forcaTaticaElement.innerHTML = `<span class="text-red-400">🔒 VAGAS ESGOTADAS</span>`;
+            disableTeamButtons("forca-tatica");
+          } else {
+            forcaTaticaElement.textContent = `${remaining.forcaTatica}/${remaining.totalPerTeam} vagas disponíveis`;
+            enableTeamButtons("forca-tatica");
+          }
+        }
+
+        // Atualizar contador e botões dos Espectros
+        if (espectrosElement) {
+          if (remaining.espectros <= 0) {
+            espectrosElement.innerHTML = `<span class="text-red-400">🔒 VAGAS ESGOTADAS</span>`;
+            disableTeamButtons("espectros");
+          } else {
+            espectrosElement.textContent = `${remaining.espectros}/${remaining.totalPerTeam} vagas disponíveis`;
+            enableTeamButtons("espectros");
+          }
+        }
+      }
+
+      // Função para desabilitar botões quando vagas esgotam
+      function disableTeamButtons(team) {
+        const pixBtn = document.getElementById(
+          `btn-pix-${team.replace("-", "-")}`
+        );
+        const groupBtn = document.getElementById(
+          `btn-group-${team.replace("-", "-")}`
+        );
+
+        if (pixBtn) {
+          pixBtn.disabled = true;
+          pixBtn.style.opacity = "0.5";
+          pixBtn.style.cursor = "not-allowed";
+          pixBtn.onclick = null;
+          pixBtn.innerHTML = "🔒 Vagas Esgotadas";
+        }
+
+        if (groupBtn) {
+          groupBtn.style.opacity = "0.5";
+          groupBtn.style.cursor = "not-allowed";
+          groupBtn.style.pointerEvents = "none";
+          groupBtn.innerHTML = "🔒 Vagas Esgotadas";
+        }
+      }
+
+      // Função para reabilitar botões quando há vagas
+      function enableTeamButtons(team) {
+        const pixBtn = document.getElementById(
+          `btn-pix-${team.replace("-", "-")}`
+        );
+        const groupBtn = document.getElementById(
+          `btn-group-${team.replace("-", "-")}`
+        );
+
+        if (pixBtn) {
+          pixBtn.disabled = false;
+          pixBtn.style.opacity = "1";
+          pixBtn.style.cursor = "pointer";
+          pixBtn.onclick = copyPixKey;
+          pixBtn.innerHTML = `Copiar Chave PIX
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+            </svg>`;
+        }
+
+        if (groupBtn) {
+          groupBtn.style.opacity = "1";
+          groupBtn.style.cursor = "pointer";
+          groupBtn.style.pointerEvents = "auto";
+          groupBtn.innerHTML = `Entrar no Grupo
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+            </svg>`;
+        }
+      }
+
       // Executar ao carregar a página
       document.addEventListener("DOMContentLoaded", function () {
         updateGameDateDisplay();
         updateGameDateOnly();
         updateAdditionalPatchPrice();
+        updateTicketCounts();
         updateCountdown();
       });
 
@@ -1219,6 +1405,7 @@
       updateGameDateDisplay();
       updateGameDateOnly();
       updateAdditionalPatchPrice();
+      updateTicketCounts();
       updateCountdown();
 
       // Atualizar a cada segundo
