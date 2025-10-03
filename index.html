@@ -65,7 +65,6 @@
           })
           .catch((err) => {
             console.error("Erro ao copiar chave PIX:", err);
-            // Fallback para browsers mais antigos
             const textArea = document.createElement("textarea");
             textArea.value = pixKey;
             document.body.appendChild(textArea);
@@ -832,7 +831,7 @@
                     class="text-[--ol] font-semibold text-sm"
                     id="tickets-forca-tatica"
                   >
-                    10/10 vagas disponíveis
+                    Carregando vagas...
                   </p>
                 </div>
               </div>
@@ -941,7 +940,7 @@
                     class="text-[--kh] font-semibold text-sm"
                     id="tickets-espectros"
                   >
-                    10/10 vagas disponíveis
+                    Carregando vagas...
                   </p>
                 </div>
               </div>
@@ -1116,23 +1115,21 @@
     </footer>
 
     <script>
-      // Configurações
       const REGISTRATION_PRICE = 20.0;
-      const TOTAL_TICKETS = 20;
-      const TICKETS_SOLD_FORCA_TATICA = 10;
-      const TICKETS_SOLD_ESPECTROS = 1;
 
-      // Datas fixas
+      let TICKETS_SOLD_FORCA_TATICA = 0;
+      let TICKETS_SOLD_ESPECTROS = 0;
+      let CAPACITY_MAX_FORCA_TATICA = 10;
+      let CAPACITY_MAX_ESPECTROS = 10;
+
       const REGISTRATION_OPEN = new Date("2025-10-01T00:00:00");
       const GAME_DATE = new Date("2025-11-09T06:00:00");
 
-      // Calcular REGISTRATION_CLOSE: 20 dias antes de GAME_DATE às 00:00
       const REGISTRATION_CLOSE = new Date(
         GAME_DATE.getTime() - 20 * 24 * 60 * 60 * 1000
       );
-      REGISTRATION_CLOSE.setHours(0, 0, 0, 0); // Definir para 00:00:00
+      REGISTRATION_CLOSE.setHours(0, 0, 0, 0);
 
-      // Função para formatar apenas a data (sem horário)
       function formatDateOnlyToPT(date) {
         const months = [
           "Janeiro",
@@ -1156,7 +1153,6 @@
         return `${day} de ${month} de ${year}`;
       }
 
-      // Função para formatar data em português
       function formatDateToPT(date) {
         const hours = date.getHours().toString().padStart(2, "0");
         const minutes = date.getMinutes().toString().padStart(2, "0");
@@ -1164,44 +1160,36 @@
         return `${formatDateOnlyToPT(date)} às ${hours}:${minutes}h`;
       }
 
-      // Função para determinar a fase atual e atualizar contador
       function updateCountdown() {
-        const now = new Date(); // Usar data atual a cada chamada
+        const now = new Date();
         let targetDate, titleText, dateText, phase;
 
-        // Determinar qual fase estamos
         if (now < REGISTRATION_OPEN) {
-          // Fase 1: Aguardando abertura das inscrições
           targetDate = REGISTRATION_OPEN;
           titleText = "TEMPO PARA ABERTURA DAS INSCRIÇÕES";
           dateText = formatDateToPT(REGISTRATION_OPEN);
           phase = "pre-registration";
         } else if (now >= REGISTRATION_OPEN && now < REGISTRATION_CLOSE) {
-          // Fase 2: Inscrições abertas, contando para fechamento
           targetDate = REGISTRATION_CLOSE;
           titleText = "TEMPO RESTANTE PARA INSCRIÇÕES";
           dateText = formatDateToPT(REGISTRATION_CLOSE);
           phase = "registration-open";
         } else if (now >= REGISTRATION_CLOSE && now < GAME_DATE) {
-          // Fase 3: Inscrições fechadas, contando para o jogo
           targetDate = GAME_DATE;
           titleText = "TEMPO PARA INÍCIO DA OPERAÇÃO";
           dateText = formatDateToPT(GAME_DATE);
           phase = "pre-game";
         } else {
-          // Jogo já começou
           titleText = "OPERAÇÃO ECLIPSE EM ANDAMENTO";
           dateText = "O jogo já começou!";
           phase = "game-started";
         }
 
-        // Atualizar textos
         document.getElementById("countdown-title-text").textContent = titleText;
         document.getElementById("countdown-date-text").textContent = dateText;
 
-        // Calcular e mostrar contador se ainda não começou o jogo
         if (phase !== "game-started") {
-          const timeLeft = targetDate - now; // Usar 'now' ao invés de 'NOW'
+          const timeLeft = targetDate - now;
 
           if (timeLeft > 0) {
             const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
@@ -1232,18 +1220,15 @@
             document.getElementById("seconds").textContent = "00";
           }
         } else {
-          // Jogo começou, mostrar zeros
           document.getElementById("days").textContent = "00";
           document.getElementById("hours").textContent = "00";
           document.getElementById("minutes").textContent = "00";
           document.getElementById("seconds").textContent = "00";
         }
 
-        // Controlar visibilidade dos elementos de inscrição
         updateRegistrationStatus(phase);
       }
 
-      // Função para controlar visibilidade dos elementos
       function updateRegistrationStatus(phase) {
         const paymentInfo = document.getElementById("payment-info");
         const whatsappNotice = document.getElementById("whatsapp-notice");
@@ -1253,7 +1238,6 @@
         const team1Prices = document.getElementById("team1-prices");
         const team2Prices = document.getElementById("team2-prices");
 
-        // Mostrar elementos apenas durante a fase de inscrições abertas
         const shouldShow = phase === "registration-open";
 
         if (paymentInfo)
@@ -1271,7 +1255,6 @@
         if (team2Prices)
           team2Prices.style.display = shouldShow ? "block" : "none";
 
-        // Atualizar preços dinamicamente
         if (shouldShow) {
           const team1Price = document.getElementById("team1-price");
           const team2Price = document.getElementById("team2-price");
@@ -1285,7 +1268,6 @@
         }
       }
 
-      // Função para atualizar a data do jogo exibida
       function updateGameDateDisplay() {
         const gameDateElement = document.getElementById("game-date-display");
         if (gameDateElement) {
@@ -1293,7 +1275,6 @@
         }
       }
 
-      // Função para atualizar o preço do patch adicional
       function updateAdditionalPatchPrice() {
         const patchPriceElement = document.getElementById(
           "patch-additional-price"
@@ -1307,7 +1288,6 @@
         }
       }
 
-      // Função para atualizar a data do jogo simples (sem horário)
       function updateGameDateOnly() {
         const gameDateOnlyElement = document.getElementById("game-date-only");
         if (gameDateOnlyElement) {
@@ -1315,17 +1295,17 @@
         }
       }
 
-      // Função para calcular ingressos restantes por time
       function calculateRemainingTickets() {
-        const ticketsPerTeam = Math.floor(TOTAL_TICKETS / 2);
         return {
-          forcaTatica: ticketsPerTeam - TICKETS_SOLD_FORCA_TATICA,
-          espectros: ticketsPerTeam - TICKETS_SOLD_ESPECTROS,
-          totalPerTeam: ticketsPerTeam,
+          forcaTatica: CAPACITY_MAX_FORCA_TATICA - TICKETS_SOLD_FORCA_TATICA,
+          espectros: CAPACITY_MAX_ESPECTROS - TICKETS_SOLD_ESPECTROS,
+          totalPerTeam: {
+            forcaTatica: CAPACITY_MAX_FORCA_TATICA,
+            espectros: CAPACITY_MAX_ESPECTROS,
+          },
         };
       }
 
-      // Função para atualizar a exibição dos ingressos restantes
       function updateTicketCounts() {
         const remaining = calculateRemainingTickets();
 
@@ -1334,30 +1314,41 @@
         );
         const espectrosElement = document.getElementById("tickets-espectros");
 
-        // Atualizar contador e botões da Força Tática
         if (forcaTaticaElement) {
           if (remaining.forcaTatica <= 0) {
             forcaTaticaElement.innerHTML = `<span class="text-red-400">🔒 VAGAS ESGOTADAS</span>`;
             disableTeamButtons("forca-tatica");
           } else {
-            forcaTaticaElement.textContent = `${remaining.forcaTatica}/${remaining.totalPerTeam} vagas disponíveis`;
+            forcaTaticaElement.textContent = `${remaining.forcaTatica}/${remaining.totalPerTeam.forcaTatica} vagas disponíveis`;
             enableTeamButtons("forca-tatica");
           }
         }
 
-        // Atualizar contador e botões dos Espectros
         if (espectrosElement) {
           if (remaining.espectros <= 0) {
             espectrosElement.innerHTML = `<span class="text-red-400">🔒 VAGAS ESGOTADAS</span>`;
             disableTeamButtons("espectros");
           } else {
-            espectrosElement.textContent = `${remaining.espectros}/${remaining.totalPerTeam} vagas disponíveis`;
+            espectrosElement.textContent = `${remaining.espectros}/${remaining.totalPerTeam.espectros} vagas disponíveis`;
             enableTeamButtons("espectros");
           }
         }
       }
 
-      // Função para desabilitar botões quando vagas esgotam
+      function showTicketError(message = "Erro ao carregar vagas") {
+        const forcaTaticaElement = document.getElementById(
+          "tickets-forca-tatica"
+        );
+        const espectrosElement = document.getElementById("tickets-espectros");
+
+        if (forcaTaticaElement) {
+          forcaTaticaElement.innerHTML = `<span class="text-yellow-400">⚠️ ${message}</span>`;
+        }
+        if (espectrosElement) {
+          espectrosElement.innerHTML = `<span class="text-yellow-400">⚠️ ${message}</span>`;
+        }
+      }
+
       function disableTeamButtons(team) {
         const pixBtn = document.getElementById(
           `btn-pix-${team.replace("-", "-")}`
@@ -1382,7 +1373,6 @@
         }
       }
 
-      // Função para reabilitar botões quando há vagas
       function enableTeamButtons(team) {
         const pixBtn = document.getElementById(
           `btn-pix-${team.replace("-", "-")}`
@@ -1413,24 +1403,126 @@
         }
       }
 
-      // Executar ao carregar a página
       document.addEventListener("DOMContentLoaded", function () {
         updateGameDateDisplay();
         updateGameDateOnly();
         updateAdditionalPatchPrice();
-        updateTicketCounts();
         updateCountdown();
       });
 
-      // Executar imediatamente também
       updateGameDateDisplay();
       updateGameDateOnly();
       updateAdditionalPatchPrice();
-      updateTicketCounts();
       updateCountdown();
 
-      // Atualizar a cada segundo
       setInterval(updateCountdown, 1000);
+    </script>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+      import {
+        getFirestore,
+        query,
+        collection,
+        doc,
+        getDoc,
+        onSnapshot,
+      } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyD1-u019uDApco6WhTkqYCqKGww2gBAVJk",
+        authDomain: "franco-milsim.firebaseapp.com",
+        projectId: "franco-milsim",
+        storageBucket: "franco-milsim.firebasestorage.app",
+        messagingSenderId: "50378710651",
+        appId: "1:50378710651:web:055a82ce7ae88469f6ccde",
+        measurementId: "G-5B1335PYH0",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      async function loadTeamData() {
+        try {
+          const forcaTaticaRef = doc(
+            db,
+            "operacao-eclipse-2025",
+            "forca-tatica"
+          );
+          const forcaTaticaSnap = await getDoc(forcaTaticaRef);
+
+          const espectrosRef = doc(db, "operacao-eclipse-2025", "espectros");
+          const espectrosSnap = await getDoc(espectrosRef);
+
+          if (forcaTaticaSnap.exists()) {
+            const forcaTaticaData = forcaTaticaSnap.data();
+            CAPACITY_MAX_FORCA_TATICA = forcaTaticaData.capacityMax || 0;
+            TICKETS_SOLD_FORCA_TATICA = forcaTaticaData.memberCount || 0;
+          }
+
+          if (espectrosSnap.exists()) {
+            const espectrosData = espectrosSnap.data();
+            CAPACITY_MAX_ESPECTROS = espectrosData.capacityMax || 0;
+            TICKETS_SOLD_ESPECTROS = espectrosData.memberCount || 0;
+          }
+
+          updateTicketCounts();
+        } catch (error) {
+          console.error("Erro ao carregar dados do Firebase:", error);
+          showTicketError("Erro ao conectar com servidor");
+          setTimeout(() => {
+            updateTicketCounts();
+          }, 3000);
+        }
+      }
+
+      function setupRealtimeListeners() {
+        try {
+          const forcaTaticaRef = doc(
+            db,
+            "operacao-eclipse-2025",
+            "forca-tatica"
+          );
+          const espectrosRef = doc(db, "operacao-eclipse-2025", "espectros");
+
+          onSnapshot(
+            forcaTaticaRef,
+            (doc) => {
+              if (doc.exists()) {
+                const data = doc.data();
+                CAPACITY_MAX_FORCA_TATICA = data.capacityMax || 10;
+                TICKETS_SOLD_FORCA_TATICA = data.memberCount || 0;
+                updateTicketCounts();
+              }
+            },
+            (error) => {
+              console.error("Erro no listener da Força Tática:", error);
+            }
+          );
+
+          onSnapshot(
+            espectrosRef,
+            (doc) => {
+              if (doc.exists()) {
+                const data = doc.data();
+                CAPACITY_MAX_ESPECTROS = data.capacityMax || 10;
+                TICKETS_SOLD_ESPECTROS = data.memberCount || 0;
+                updateTicketCounts();
+              }
+            },
+            (error) => {
+              console.error("Erro no listener dos Espectros:", error);
+            }
+          );
+        } catch (error) {
+          console.error("Erro ao configurar listeners:", error);
+        }
+      }
+
+      window.addEventListener("load", () => {
+        loadTeamData();
+        setupRealtimeListeners();
+      });
     </script>
   </body>
 </html>
